@@ -1,24 +1,12 @@
-resource "aws_subnet" "private_subnet3" {
-
-    vpc_id = aws_vpc.myvpc.id
-    cidr_block = "10.0.3.0/24"
-    availability_zone = "ap-south-1a"
+resource "aws_subnet" "private_subnets" {
+  count = length(var.private_subnet_cidrs)
+  vpc_id = aws_vpc.myvpc.id
+  cidr_block = element(var.private_subnet_cidrs, count.index)
+  availability_zone = element(var.azs, count.index)
   
-  tags = {
-    Name = "Private Subnet 3"
-
+tags = {
+  Name = "Private Subnet ${count.index + 1}"
   }
   
 }
 
-resource "aws_subnet" "private_subnet4" {
-    vpc_id = aws_vpc.myvpc.id
-    cidr_block = "10.0.4.0/24"
-    availability_zone = "ap-south-1b"
-  
-  tags = {
-    Name = "Private Subnet 4"
-
-  }
-  
-}
