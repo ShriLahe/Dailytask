@@ -7,3 +7,8 @@ user_data = <<-EOF
         echo "<html><body><h1>Welcome to my website!</h1></body></html>" > /var/www/html/index.html
         sudo systemctl restart apache2
   EOF
+
+  tags = {
+    "Name" : "WebServerInstall"
+  }
+
